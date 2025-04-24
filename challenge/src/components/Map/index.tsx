@@ -51,10 +51,7 @@ const Map = () => {
 
   return (
     <>
-      <div
-        ref={mapRef}
-        style={{ height: "100%", width: "700px", minHeight: "700px" }}
-      ></div>
+      <div ref={mapRef} className="map"></div>
     </>
   );
 };

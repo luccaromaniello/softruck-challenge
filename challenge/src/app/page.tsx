@@ -5,11 +5,17 @@ import AnimatedMap from "@/components/AnimatedMap";
 
 export default function Home() {
   return (
-    <Card>
-      <main className="container">
-        <Instructions />
-        <AnimatedMap />
-      </main>
-    </Card>
+    <main className="container">
+      <Card>
+        <div className="card-container">
+          <div className="instructions-container">
+            <Instructions />
+          </div>
+          <div className="map-container">
+            <AnimatedMap />
+          </div>
+        </div>
+      </Card>
+    </main>
   );
 }
