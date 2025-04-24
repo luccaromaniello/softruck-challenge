@@ -1,14 +1,15 @@
 import Instructions from "@/components/Instructions";
 import "../styles/main.scss";
 import Card from "@/components/Card";
+import AnimatedMap from "@/components/AnimatedMap";
 
 export default function Home() {
   return (
-    <main className="container">
-      <Card>
+    <Card>
+      <main className="container">
         <Instructions />
-        {/* <AnimatedMap /> */}
-      </Card>
-    </main>
+        <AnimatedMap />
+      </main>
+    </Card>
   );
 }
