@@ -1,10 +1,9 @@
 "use client";
 import Image from "next/image";
-// import "./Instructions.module.scss";
 
 const Instructions = () => {
   return (
-    <div id="header-logo-container">
+    <div>
       <Image
         src="/softruck_logo.png"
         alt="Softruck logo"
