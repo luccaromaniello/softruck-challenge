@@ -1,17 +1,11 @@
-import Image from "next/image";
+import Instructions from "@/Instructions/instructions";
 
 export default function Home() {
   return (
     <div>
       <main>
-        <Image
-          src="/softruck_logo.png"
-          alt="Softruck logo"
-          width={56}
-          height={56}
-          priority
-        />
-        Hello world
+        <Instructions />
+        {/* <AnimatedMap /> */}
       </main>
     </div>
   );
