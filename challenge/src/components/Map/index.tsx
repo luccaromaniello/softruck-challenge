@@ -3,32 +3,44 @@ import { useEffect, useRef } from "react";
 const position = { lat: -23.963214, lng: -46.28054 };
 
 const Map = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const initMap = async () => {
-      // ✅ Import base maps library
       const { Map } = (await google.maps.importLibrary(
         "maps",
       )) as google.maps.MapsLibrary;
 
-      // ✅ Import advanced marker library
       const { AdvancedMarkerElement } = (await google.maps.importLibrary(
         "marker",
       )) as google.maps.MarkerLibrary;
 
-      if (!ref.current) return;
+      if (!mapRef.current) return;
 
-      const map = new Map(ref.current, {
+      const map = new Map(mapRef.current, {
         center: position,
         zoom: 15,
         mapId: "YOUR_MAP_ID", // Optional
       });
 
+      const spriteUrl = "/cars.png";
+      const frameWidth = 160;
+      const frameHeight = 160;
+
+      const frameIndex = 1; // constrols index of frame
+
+      const cursorImage = document.createElement("div");
+      cursorImage.style.width = `${frameWidth}px`;
+      cursorImage.style.height = `${frameHeight}px`;
+      cursorImage.style.backgroundImage = `url(${spriteUrl})`;
+      cursorImage.style.backgroundPosition = `-${frameWidth * frameIndex}px 0`;
+      cursorImage.style.backgroundSize = "auto";
+
       new AdvancedMarkerElement({
         map,
         position,
-        title: "React + TypeScript + Google Maps",
+        content: cursorImage,
+        title: "Marker",
       });
     };
 
@@ -40,7 +52,7 @@ const Map = () => {
   return (
     <>
       <div
-        ref={ref}
+        ref={mapRef}
         style={{ height: "100%", width: "700px", minHeight: "700px" }}
       ></div>
     </>
