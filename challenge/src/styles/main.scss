@@ -6,15 +6,21 @@ $color-text-secondary: $neutral-secondary;
 $background-color: #fafafa;
 
 body {
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   color: $neutral-primary;
   background-color: $background-color;
 }
 
 .container {
-  max-width: 1280px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {

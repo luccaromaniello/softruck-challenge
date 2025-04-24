@@ -4,13 +4,11 @@ import Card from "@/components/Card";
 
 export default function Home() {
   return (
-    <div>
-      <main className="container">
-        <Card>
-          <Instructions />
-          {/* <AnimatedMap /> */}
-        </Card>
-      </main>
-    </div>
+    <main className="container">
+      <Card>
+        <Instructions />
+        {/* <AnimatedMap /> */}
+      </Card>
+    </main>
   );
 }
