@@ -1,9 +1,36 @@
 "use client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Instructions = () => {
   const text = useTranslations("Home");
+  const { push } = useRouter();
+  const path = usePathname();
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [languageChanged, setLanguageChanged] = useState(false);
+
+  useEffect(() => {
+    const currentLanguage = path.split("/")[1];
+    if (currentLanguage && currentLanguage !== selectedLanguage) {
+      setSelectedLanguage(currentLanguage);
+    }
+  }, [path, selectedLanguage]);
+
+  useEffect(() => {
+    if (languageChanged) {
+      const currentPath = path.split("/").slice(2).join("/");
+      push(`/${selectedLanguage}/${currentPath}`);
+      setLanguageChanged(false);
+    }
+  }, [languageChanged, selectedLanguage, path, push]);
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLanguage(e.target.value);
+    setLanguageChanged(true);
+  };
 
   return (
     <div className="instructions-content">
@@ -47,6 +74,10 @@ const Instructions = () => {
         </div>
       </div>
       <p className="text-tertiary">{text("footer")}</p>
+      <select onChange={handleLanguageChange} value={selectedLanguage}>
+        <option value="en">EN</option>
+        <option value="pt-br">PT-BR</option>
+      </select>
     </div>
   );
 };
