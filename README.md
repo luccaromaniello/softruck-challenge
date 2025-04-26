@@ -33,3 +33,5 @@ Styles were maintained with one single file to keep it short, based on the proje
 The animation of the car depends on the provided coordinates to make it smoother. Please have that in mind that if we had more updated positions (more entries in GPS coordinates array), then it should be a lot more assertive.
 
 Responsiveness is not being taken into consideration due to ponctual deadlines. Ideally, we would have to take it into consideration when displaying such visualization for users.
+
+I18n was added, but not applied to the map language. This is a minor technical debt I've added due to deadline constraints.
