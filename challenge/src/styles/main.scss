@@ -100,3 +100,20 @@ body {
   justify-content: center;
   gap: 16px;
 }
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.dropdown {
+  color: $color-text-secondary;
+  background: transparent;
+  border: 1px solid $neutral-secondary;
+  border-radius: 8px;
+  padding: 6px 8px;
+  width: 96px;
+  height: auto;
+}
