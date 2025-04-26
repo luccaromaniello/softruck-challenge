@@ -5,20 +5,20 @@ type Coordinates = { latitude: number; longitude: number; direction: number };
 
 const createMarker = () => {
   const spriteUrl = "/cars.png";
-  const frameWidth = 148;
+  const frameWidth = 96;
   const frameHeight = 148;
 
   const frameIndex = 1; // constrols index of frame
 
   const cursorContainer = document.createElement("div");
-  cursorContainer.style.width = "48px";
-  cursorContainer.style.height = "48px";
+  cursorContainer.style.width = "32px";
+  cursorContainer.style.height = "32px";
 
   const cursorImage = document.createElement("div");
   cursorImage.style.width = `${frameWidth}px`;
   cursorImage.style.height = `${frameHeight}px`;
   cursorImage.style.backgroundImage = `url(${spriteUrl})`;
-  cursorImage.style.backgroundPosition = `-${frameWidth * frameIndex}px 0`;
+  cursorImage.style.backgroundPosition = `-${frameWidth * 2 * frameIndex}px 0`;
   cursorImage.style.backgroundSize = "auto";
   cursorImage.style.transform = "scale(0.3)";
   cursorImage.style.transformOrigin = "top left";
@@ -91,7 +91,7 @@ const Map = () => {
 
           const step = (now: number) => {
             const elapsed = now - startTime;
-            const t = Math.min(elapsed / 1000, 1);
+            const t = Math.min((elapsed / 1000) * 0.7, 1);
 
             const currentLat = linearInterpolation(
               from.latitude,
