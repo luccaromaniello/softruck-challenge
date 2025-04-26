@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+type Coordinates = { latitude: number; longitude: number; direction: number };
+
 const createMarker = () => {
   const spriteUrl = "/cars.png";
   const frameWidth = 160;
@@ -28,18 +30,16 @@ const createMarker = () => {
 
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [positions, setPositions] = useState<
-    { latitude: number; longitude: number }[]
-  >([]);
+  const [positions, setPositions] = useState<Coordinates[]>([]);
 
   useEffect(() => {
-    const fetchPosition = async () => {
+    const fetchPositions = async () => {
       const res = await fetch("/frontend_data_gps.json");
       const data = await res.json();
       setPositions(data.courses[0].gps);
     };
 
-    fetchPosition();
+    fetchPositions();
   }, []);
 
   useEffect(() => {
@@ -83,13 +83,18 @@ const Map = () => {
           return;
         }
 
+        const next = positions[index];
+
         const nextPosition = {
-          lat: positions[index].latitude,
-          lng: positions[index].longitude,
+          lat: next.latitude,
+          lng: next.longitude,
         };
 
         marker.position = nextPosition;
         map.setCenter(nextPosition);
+
+        const rotation = marker.content as HTMLElement;
+        rotation.style.transform = `rotate(${next.direction}deg)`;
 
         index++;
         // animatePath(line);
