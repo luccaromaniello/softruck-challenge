@@ -14,15 +14,15 @@ If you don't know how to generate your API key, please refer to the [documentati
 
 If you're not already in the `challenge` folder:
 
-`cd challenge`;
+`cd challenge`
 
 Install dependencies:
 
-`npm install`;
+`npm install`
 
 Run server:
 
-`npm run dev`;
+`npm run dev`
 
 ## Considerations
 
