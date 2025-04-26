@@ -2,6 +2,31 @@
 import { useEffect, useRef } from "react";
 const position = { lat: -23.963214, lng: -46.28054 };
 
+const createMarker = () => {
+  const spriteUrl = "/cars.png";
+  const frameWidth = 160;
+  const frameHeight = 160;
+
+  const frameIndex = 1; // constrols index of frame
+
+  const cursorContainer = document.createElement("div");
+  cursorContainer.style.width = "48px";
+  cursorContainer.style.height = "48px";
+
+  const cursorImage = document.createElement("div");
+  cursorImage.style.width = `${frameWidth}px`;
+  cursorImage.style.height = `${frameHeight}px`;
+  cursorImage.style.backgroundImage = `url(${spriteUrl})`;
+  cursorImage.style.backgroundPosition = `-${frameWidth * frameIndex}px 0`;
+  cursorImage.style.backgroundSize = "auto";
+  cursorImage.style.transform = "scale(0.3)";
+  cursorImage.style.transformOrigin = "top left";
+
+  cursorContainer.append(cursorImage);
+
+  return cursorContainer;
+};
+
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
@@ -23,31 +48,10 @@ const Map = () => {
         mapId: "YOUR_MAP_ID", // Optional
       });
 
-      const spriteUrl = "/cars.png";
-      const frameWidth = 160;
-      const frameHeight = 160;
-
-      const frameIndex = 1; // constrols index of frame
-
-      const cursorContainer = document.createElement("div");
-      cursorContainer.style.width = "48px";
-      cursorContainer.style.height = "48px";
-
-      const cursorImage = document.createElement("div");
-      cursorImage.style.width = `${frameWidth}px`;
-      cursorImage.style.height = `${frameHeight}px`;
-      cursorImage.style.backgroundImage = `url(${spriteUrl})`;
-      cursorImage.style.backgroundPosition = `-${frameWidth * frameIndex}px 0`;
-      cursorImage.style.backgroundSize = "auto";
-      cursorImage.style.transform = "scale(0.3)";
-      cursorImage.style.transformOrigin = "top left";
-
-      cursorContainer.append(cursorImage);
-
       new AdvancedMarkerElement({
         map,
         position,
-        content: cursorImage,
+        content: createMarker(),
         title: "Marker",
       });
     };
