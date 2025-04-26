@@ -1,3 +1,5 @@
+![Softruck project overview](https://github.com/luccaromaniello/softruck-challenge/blob/main/challenge/public/overview.png?raw=true)
+
 # Softruck Code Challenge
 
 You can read the challenge instructions in the `instructions` folder.
