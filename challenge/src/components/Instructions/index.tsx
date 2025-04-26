@@ -18,8 +18,10 @@ const Instructions = () => {
         </div>
         <h1>Softruck Code Challenge</h1>
         <p className="text-secondary">
-          The map animation is related to a Softruck coding challenge. You can
-          read the instructions in the main repository.
+          The map animation is related to a Softruck coding challenge. Is is not
+          looped, so you want to see it again you should update the page.
+          <br /> <br />
+          You can read the instructions in the main repository.
         </p>
         <div className="contact-container">
           <span>
