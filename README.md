@@ -8,7 +8,7 @@ First, create a `.env` file inside the `challenge` folder. This file should have
 
 `GOOGLE_MAPS_API_KEY="<YOUR_API_KEY_HERE>"`
 
-If you don't know how to generate your API key, please refer to the [documentation] (https://developers.google.com/maps/documentation/javascript).
+If you don't know how to generate your API key, please refer to the [documentation](https://developers.google.com/maps/documentation/javascript).
 
 ### Run project
 
