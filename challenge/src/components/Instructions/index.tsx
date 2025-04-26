@@ -16,7 +16,7 @@ const Instructions = () => {
             priority
           />
         </div>
-        <h1>Softruck Design Challenge</h1>
+        <h1>Softruck Code Challenge</h1>
         <p className="text-secondary">
           The map animation is related to a Softruck coding challenge. You can
           read the instructions in the main repository.
