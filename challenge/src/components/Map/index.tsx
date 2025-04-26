@@ -28,6 +28,10 @@ const createMarker = () => {
   return cursorContainer;
 };
 
+function linearInterpolation(start: number, end: number, t: number): number {
+  return start + (end - start) * t;
+}
+
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [positions, setPositions] = useState<Coordinates[]>([]);
@@ -75,32 +79,58 @@ const Map = () => {
         title: "Marker",
       });
 
-      let index = 1;
-      const interval = setInterval(() => {
-        if (index >= positions.length) {
-          // index = 0;
-          clearInterval(interval);
-          return;
-        }
+      const animateMarkerSmooth = () => {
+        let index = 1;
 
-        const next = positions[index];
+        const animateSegment = () => {
+          if (index >= positions.length) return;
 
-        const nextPosition = {
-          lat: next.latitude,
-          lng: next.longitude,
+          const from = positions[index - 1];
+          const to = positions[index];
+          const startTime = performance.now();
+
+          const step = (now: number) => {
+            const elapsed = now - startTime;
+            const t = Math.min(elapsed / 1000, 1);
+
+            const currentLat = linearInterpolation(
+              from.latitude,
+              to.latitude,
+              t,
+            );
+            const currentLng = linearInterpolation(
+              from.longitude,
+              to.longitude,
+              t,
+            );
+            const currentBearing = linearInterpolation(
+              from.direction,
+              to.direction,
+              t,
+            );
+
+            const position = { lat: currentLat, lng: currentLng };
+            marker.position = position;
+            map.setCenter(position);
+
+            const rotation = marker.content as HTMLElement;
+            rotation.style.transform = `rotate(${currentBearing}deg)`;
+
+            if (t < 1) {
+              requestAnimationFrame(step);
+            } else {
+              index++;
+              animateSegment();
+            }
+          };
+
+          requestAnimationFrame(step);
         };
 
-        marker.position = nextPosition;
-        map.setCenter(nextPosition);
+        animateSegment();
+      };
 
-        const rotation = marker.content as HTMLElement;
-        rotation.style.transform = `rotate(${next.direction}deg)`;
-
-        index++;
-        // animatePath(line);
-      }, 1000);
-
-      return () => clearInterval(interval);
+      animateMarkerSmooth();
     };
 
     if (typeof window !== "undefined") {
