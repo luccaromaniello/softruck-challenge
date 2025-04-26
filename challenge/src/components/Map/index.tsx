@@ -19,7 +19,7 @@ const Map = () => {
 
       const map = new Map(mapRef.current, {
         center: position,
-        zoom: 15,
+        zoom: 18,
         mapId: "YOUR_MAP_ID", // Optional
       });
 
@@ -29,12 +29,20 @@ const Map = () => {
 
       const frameIndex = 1; // constrols index of frame
 
+      const cursorContainer = document.createElement("div");
+      cursorContainer.style.width = "48px";
+      cursorContainer.style.height = "48px";
+
       const cursorImage = document.createElement("div");
       cursorImage.style.width = `${frameWidth}px`;
       cursorImage.style.height = `${frameHeight}px`;
       cursorImage.style.backgroundImage = `url(${spriteUrl})`;
       cursorImage.style.backgroundPosition = `-${frameWidth * frameIndex}px 0`;
       cursorImage.style.backgroundSize = "auto";
+      cursorImage.style.transform = "scale(0.3)";
+      cursorImage.style.transformOrigin = "top left";
+
+      cursorContainer.append(cursorImage);
 
       new AdvancedMarkerElement({
         map,
