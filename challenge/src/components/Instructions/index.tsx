@@ -73,11 +73,17 @@ const Instructions = () => {
           </span>
         </div>
       </div>
-      <p className="text-tertiary">{text("footer")}</p>
-      <select onChange={handleLanguageChange} value={selectedLanguage}>
-        <option value="en">EN</option>
-        <option value="pt-br">PT-BR</option>
-      </select>
+      <div className="footer-container">
+        <select
+          onChange={handleLanguageChange}
+          value={selectedLanguage}
+          className="dropdown"
+        >
+          <option value="en">EN</option>
+          <option value="pt-br">PT-BR</option>
+        </select>
+        <p className="text-tertiary">{text("footer")}</p>
+      </div>
     </div>
   );
 };
