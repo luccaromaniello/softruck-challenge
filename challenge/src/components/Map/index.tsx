@@ -63,6 +63,9 @@ const Map = () => {
         center: initialPosition,
         zoom: 17,
         mapId: "SOFTRUCK_MAP",
+        disableDefaultUI: true,
+        gestureHandling: "none",
+        zoomControl: false,
       });
 
       const marker = new AdvancedMarkerElement({
