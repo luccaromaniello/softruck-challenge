@@ -99,22 +99,10 @@ const Map = () => {
           lng: positions[index].longitude,
         };
 
-        const line = new google.maps.Polyline({
-          path: [
-            {
-              lat: positions[index - 1 < 0 ? 0 : index - 1].latitude,
-              lng: positions[index - 1 < 0 ? 0 : index - 1].longitude,
-            },
-            { lat: nextPosition.lat, lng: nextPosition.lng },
-          ],
-          map: map,
-        });
-
         marker.position = nextPosition;
         map.setCenter(nextPosition);
 
         index++;
-
         // animatePath(line);
       }, 1000);
 
