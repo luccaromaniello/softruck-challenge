@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
-const position = { lat: -23.963214, lng: -46.28054 };
+import { useEffect, useRef, useState } from "react";
 
 const createMarker = () => {
   const spriteUrl = "/cars.png";
@@ -29,6 +28,21 @@ const createMarker = () => {
 
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({
+    lat: -19.937632,
+    lng: -43.9377692,
+  });
+
+  useEffect(() => {
+    const fetchPosition = async () => {
+      const res = await fetch("/frontend_data_gps.json");
+      const data = await res.json();
+      const { latitude, longitude } = data.courses[0].gps[0];
+      setPosition({ lat: latitude, lng: longitude });
+    };
+
+    fetchPosition();
+  }, []);
 
   useEffect(() => {
     const initMap = async () => {
@@ -59,7 +73,7 @@ const Map = () => {
     if (typeof window !== "undefined") {
       initMap();
     }
-  }, []);
+  }, [position]);
 
   return (
     <>
