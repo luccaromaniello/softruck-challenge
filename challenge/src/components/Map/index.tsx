@@ -5,8 +5,8 @@ type Coordinates = { latitude: number; longitude: number; direction: number };
 
 const createMarker = () => {
   const spriteUrl = "/cars.png";
-  const frameWidth = 160;
-  const frameHeight = 160;
+  const frameWidth = 148;
+  const frameHeight = 148;
 
   const frameIndex = 1; // constrols index of frame
 
