@@ -26,6 +26,17 @@ const createMarker = () => {
   return cursorContainer;
 };
 
+const animatePath = (line: google.maps.Polyline) => {
+  let count = 0;
+
+  window.setInterval(() => {
+    count = (count + 1) % 200;
+    const icons = line.get("icons");
+    icons[0].offset = count / 2 + "%";
+    line.set("icons", icons);
+  }, 20);
+};
+
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [positions, setPositions] = useState<
@@ -78,7 +89,8 @@ const Map = () => {
       let index = 1;
       const interval = setInterval(() => {
         if (index >= positions.length) {
-          index = 0;
+          // index = 0;
+          clearInterval(interval);
           return;
         }
 
@@ -87,10 +99,23 @@ const Map = () => {
           lng: positions[index].longitude,
         };
 
+        const line = new google.maps.Polyline({
+          path: [
+            {
+              lat: positions[index - 1 < 0 ? 0 : index - 1].latitude,
+              lng: positions[index - 1 < 0 ? 0 : index - 1].longitude,
+            },
+            { lat: nextPosition.lat, lng: nextPosition.lng },
+          ],
+          map: map,
+        });
+
         marker.position = nextPosition;
         map.setCenter(nextPosition);
 
         index++;
+
+        // animatePath(line);
       }, 1000);
 
       return () => clearInterval(interval);
