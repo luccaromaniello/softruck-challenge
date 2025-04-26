@@ -1,7 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const Instructions = () => {
+  const text = useTranslations("Home");
+
   return (
     <div className="instructions-content">
       <div>
@@ -16,12 +19,11 @@ const Instructions = () => {
             priority
           />
         </div>
-        <h1>Softruck Code Challenge</h1>
+        <h1>{text("heading")}</h1>
         <p className="text-secondary">
-          The map animation is related to a Softruck coding challenge. Is is not
-          looped, so you want to see it again you should update the page.
+          {text("description")}
           <br /> <br />
-          You can read the instructions in the main repository.
+          {text("instructions")}
         </p>
         <div className="contact-container">
           <span>
@@ -30,7 +32,7 @@ const Instructions = () => {
               target="_blank"
               className="link"
             >
-              GitHub Repository
+              {text("githubRepo")}
             </a>
           </span>
           <span>
@@ -44,7 +46,7 @@ const Instructions = () => {
           </span>
         </div>
       </div>
-      <p className="text-tertiary">Designed and built by Lucca Romaniello</p>
+      <p className="text-tertiary">{text("footer")}</p>
     </div>
   );
 };

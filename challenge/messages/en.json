@@ -1,0 +1,9 @@
+{
+  "Home": {
+    "heading": "Softruck Code Challenge",
+    "description": "The map animation is related to a Softruck coding challenge. Is is not looped, so you want to see it again you should update the page.",
+    "instructions": "You can read the instructions in the main repository.",
+    "githubRepo": "GitHub repository",
+    "footer": "Designed and built by Lucca Romaniello"
+  }
+}
