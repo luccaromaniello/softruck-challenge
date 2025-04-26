@@ -29,8 +29,8 @@ const createMarker = () => {
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
-    lat: -19.937632,
-    lng: -43.9377692,
+    lat: -19.939477884674428,
+    lng: -43.93870853719558,
   });
 
   useEffect(() => {
