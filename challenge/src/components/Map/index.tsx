@@ -26,17 +26,6 @@ const createMarker = () => {
   return cursorContainer;
 };
 
-const animatePath = (line: google.maps.Polyline) => {
-  let count = 0;
-
-  window.setInterval(() => {
-    count = (count + 1) % 200;
-    const icons = line.get("icons");
-    icons[0].offset = count / 2 + "%";
-    line.set("icons", icons);
-  }, 20);
-};
-
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [positions, setPositions] = useState<
