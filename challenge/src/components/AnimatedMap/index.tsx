@@ -1,6 +1,5 @@
 "use client";
 import { Status, Wrapper } from "@googlemaps/react-wrapper";
-import "./AnimatedMap.module.scss";
 import Map from "@/components/Map";
 
 const AnimatedMap = () => {
