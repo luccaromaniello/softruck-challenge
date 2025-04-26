@@ -59,7 +59,7 @@ const Map = () => {
       const map = new Map(mapRef.current, {
         center: position,
         zoom: 18,
-        mapId: "YOUR_MAP_ID", // Optional
+        mapId: "SOFTRUCK_MAP",
       });
 
       new AdvancedMarkerElement({
