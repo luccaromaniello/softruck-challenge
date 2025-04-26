@@ -28,17 +28,15 @@ const createMarker = () => {
 
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({
-    lat: -19.939477884674428,
-    lng: -43.93870853719558,
-  });
+  const [positions, setPositions] = useState<
+    { latitude: number; longitude: number }[]
+  >([]);
 
   useEffect(() => {
     const fetchPosition = async () => {
       const res = await fetch("/frontend_data_gps.json");
       const data = await res.json();
-      const { latitude, longitude } = data.courses[0].gps[0];
-      setPosition({ lat: latitude, lng: longitude });
+      setPositions(data.courses[0].gps);
     };
 
     fetchPosition();
@@ -46,6 +44,8 @@ const Map = () => {
 
   useEffect(() => {
     const initMap = async () => {
+      if (!mapRef.current || positions.length === 0) return;
+
       const { Map } = (await google.maps.importLibrary(
         "maps",
       )) as google.maps.MapsLibrary;
@@ -54,26 +54,49 @@ const Map = () => {
         "marker",
       )) as google.maps.MarkerLibrary;
 
-      if (!mapRef.current) return;
+      const initialPosition = {
+        lat: positions[0].latitude,
+        lng: positions[0].longitude,
+      };
 
       const map = new Map(mapRef.current, {
-        center: position,
-        zoom: 18,
+        center: initialPosition,
+        zoom: 17,
         mapId: "SOFTRUCK_MAP",
       });
 
-      new AdvancedMarkerElement({
+      const marker = new AdvancedMarkerElement({
         map,
-        position,
+        position: initialPosition,
         content: createMarker(),
         title: "Marker",
       });
+
+      let index = 1;
+      const interval = setInterval(() => {
+        if (index >= positions.length) {
+          index = 0;
+          return;
+        }
+
+        const nextPosition = {
+          lat: positions[index].latitude,
+          lng: positions[index].longitude,
+        };
+
+        marker.position = nextPosition;
+        map.setCenter(nextPosition);
+
+        index++;
+      }, 1000);
+
+      return () => clearInterval(interval);
     };
 
     if (typeof window !== "undefined") {
       initMap();
     }
-  }, [position]);
+  }, [positions]);
 
   return (
     <>
