@@ -34,6 +34,13 @@ Styles were maintained with one single file to keep it short, based on the proje
 
 The animation of the car depends on the provided coordinates to make it smoother. Please have that in mind that if we had more updated positions (more entries in GPS coordinates array), then it should be a lot more assertive.
 
+I've also tried to add a drawing path following the car's movement, but unfortunately this API is very cost restricted (Google Maps Direction Service). I also started a manual line path, but I've opted to remove it.
+
 Responsiveness is not being taken into consideration due to ponctual deadlines. Ideally, we would have to take it into consideration when displaying such visualization for users.
 
-I18n was added, but not applied to the map language. This is a minor technical debt I've added due to deadline constraints.
+I18n was added, but it was not applied to the map language. This is a minor technical debt I've added due to deadline constraints.
+
+## Assumptions
+
+I've assumed that based on the challenge instructions (which can be vague) the main goal was to take the "gps" object from the provided JSON and map the car position, while using its "direction" in degrees to know the expected car movement.
+
